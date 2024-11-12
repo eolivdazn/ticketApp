@@ -1,0 +1,26 @@
+import TicketForm from '@/components/TicketForm'
+import prisma from '@/prisma/db'
+import React from 'react'
+import TicketDetail from './TicketDetail'
+
+interface Props {
+    params: {id: string}
+}
+
+const ViewTicket = async ({params}:Props) => {
+    const ticket = await prisma.ticket.findUnique({where: {id : parseInt(params.id)}})
+    const users = await prisma.user.findMany()
+
+    if(!users){
+      return <p className='text-destructive'> Users not found</p>
+  }
+
+    if(!ticket){
+        return <p className='text-destructive'> Ticket not found</p>
+    }
+  return (
+    <TicketDetail ticket={ticket} users={users}/>
+  )
+}
+
+export default ViewTicket
