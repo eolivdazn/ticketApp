@@ -27,7 +27,7 @@ const Users = async ({ searchParams }: { searchParams: searchParams }) => {
   return (
     <div>
       <div className="flex gap-2">
-        <Link
+        <Link id="New_user"
           href="/users/new"
           className={buttonVariants({ variant: "default" })}
         >

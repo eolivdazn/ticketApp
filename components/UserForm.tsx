@@ -113,7 +113,7 @@ const UserForm = ({ User }: Props) => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <FormControl>
+                    <FormControl id="role">
                       <SelectTrigger>
                         <SelectValue placeholder="role.." />
                       </SelectTrigger>

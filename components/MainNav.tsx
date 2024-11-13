@@ -13,9 +13,9 @@ async function MainNav() {
       <MainNavLinks role={session?.user.role} />
       <div className="flex items-center gap-2">
         {session ? (
-          <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
+          <><Link id="Logout" href="/api/auth/signout?callbackUrl=/">Logout</Link>Hello {session.user.name}</>
         ) : (
-          <Link href="/api/auth/signin">Login</Link>
+          <Link id="Login" href="/api/auth/signin">Login</Link>
         )}
         <ToogleMode />
       </div>

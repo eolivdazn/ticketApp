@@ -23,13 +23,13 @@ const DashRecentTickets = ({ tickets }: Props) => {
   return (
     <Card className="col-span-3">
       <CardHeader>
-        <CardTitle>Recently Updated</CardTitle>
+        <CardTitle id="Dash_Recently_Updated">Recently Updated</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-8">
           {tickets
             ? tickets.map((ticket) => (
-                <div className="flex items-center border-b" key={ticket.id}>
+                <div id="recent_tickets" className="flex items-center border-b" key={ticket.id}>
                   <TicketStatusBadge status={ticket.status} />
                   <div className="ml-4 space-y-1">
                     <Link href={`tickets/${ticket.id}`}>
