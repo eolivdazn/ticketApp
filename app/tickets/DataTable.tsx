@@ -1,4 +1,4 @@
-import StatusBadge from "@/components/statusBadge";
+import StatusBadge from "@/components/TicketStatusBadge";
 import TicketPriority from "@/components/TicketPriority";
 import {
   Table,
@@ -49,7 +49,9 @@ const DataTable = ({ tickets, searchParams }: Props) => {
               <TableHead>
                 <div className="flex justify-center">
                   <Link
-                    href={{ query: { ...searchParams, orderBy: "assignedToUserId" } }}
+                    href={{
+                      query: { ...searchParams, orderBy: "assignedToUserId" },
+                    }}
                   >
                     Assigned
                   </Link>
@@ -106,7 +108,7 @@ const DataTable = ({ tickets, searchParams }: Props) => {
                     </TableCell>
                     <TableCell>
                       <div className="flex justify-center">
-                        <div>{ticket.assignedToUserId? "YES": "NO"}</div>
+                        <div>{ticket.assignedToUserId ? "YES" : "NO"}</div>
                       </div>
                     </TableCell>
                     <TableCell>

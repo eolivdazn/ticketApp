@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import StatusBadge from "@/components/StatusBadge";
+import StatusBadge from "@/components/TicketStatusBadge";
 import TicketPriority from "@/components/TicketPriority";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -29,7 +29,9 @@ const TicketDetail = ({ ticket, users }: Props) => {
         <CardHeader>
           <div className="flex justify-between mb-3">
             <StatusBadge status={ticket.status} />
-            <div className="flex ml-auto"> Priority
+            <div className="flex ml-auto">
+              {" "}
+              Priority
               <TicketPriority priority={ticket.priority} />
             </div>
           </div>
@@ -71,7 +73,7 @@ const TicketDetail = ({ ticket, users }: Props) => {
         >
           Edit Ticket
         </Link>
-        <DeleteButton ticketId={ticket.id}/>
+        <DeleteButton ticketId={ticket.id} />
       </div>
     </div>
   );
