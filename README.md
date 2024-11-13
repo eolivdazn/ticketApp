@@ -50,3 +50,12 @@ npx prisma migrate dev
 
 get secret
 openssl rand -base64 32 
+
+
+Testing :
+
+jest: Our core test runner.
+
+supertest: For making HTTP requests to your API.
+
+ts-jest: Enables Jest to understand and execute TypeScript code.
