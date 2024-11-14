@@ -1,10 +1,11 @@
 name: Tests for Next.js app
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
+  workflow_dispatch:
 jobs:
   NextJS-Tests:
     name: Tests for Next.js app
