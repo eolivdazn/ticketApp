@@ -8,8 +8,6 @@ export async function POST(request: NextRequest) {
 
   const session = await getServerSession(options);
 
-  console.log(session,"session")
-
   if (!session) {
     return NextResponse.json("Please login..", { status: 401});
   }

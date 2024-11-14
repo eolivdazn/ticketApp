@@ -1,4 +1,4 @@
-import StatusBadge from "@/components/TicketStatusBadge";
+import TicketStatusBadge from "@/components/TicketStatusBadge";
 import TicketPriority from "@/components/TicketPriority";
 import {
   Table,
@@ -103,7 +103,7 @@ const DataTable = ({ tickets, searchParams }: Props) => {
                     </Link>
                     <TableCell>
                       <div className="flex justify-center">
-                        <StatusBadge status={ticket.status} />
+                        <TicketStatusBadge status={ticket.status} />
                       </div>
                     </TableCell>
                     <TableCell>

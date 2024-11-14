@@ -63,12 +63,15 @@ ts-jest: Enables Jest to understand and execute TypeScript code.
 
  docker exec -it test-mysql bash
 
+
 docker stop test-mysql
 docker rm test-mysql
-docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=strong_password -p 3307:3306 mysql
+<!-- docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=strong_password -p 3307:3306 mysql -->
 npx prisma migrate dev
 npx prisma db seed
 npx cypress run --spec cypress/e2e/run/*
 npx jest app/api/test/*
 
-
+###
+docker pull postgres
+docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres

@@ -9,7 +9,6 @@ import {
 import { User } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
-import { ArrowDown } from "lucide-react";
 import { searchParams } from "./page";
 
 interface Props {
