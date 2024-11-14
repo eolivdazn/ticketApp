@@ -39,7 +39,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
   }
 
   if (body?.password.length > 0) {
-    body.password = await bcrypt.hash(body.password, 10);;
+    body.password = await bcrypt.hash(body.password, 10);
   }
 
   if(body.password === '')
