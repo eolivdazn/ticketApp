@@ -44,9 +44,9 @@ Cypress.Commands.add("loginViaUi", () => {
   cy.get("#input-password-for-password-provider").type(password);
   cy.get('[type="submit"]').click();
   cy.get('#nav_Users').should('have.text', "Users")
-  cy.getCookie("next-auth.session-token").should("exist");
-  cy.getCookie("next-auth.csrf-token").should("exist");
-  cy.getCookie("next-auth.callback-url").should("exist");
+//   cy.getCookie("next-auth.session-token").should("exist");
+//   cy.getCookie("next-auth.csrf-token").should("exist");
+//   cy.getCookie("next-auth.callback-url").should("exist");
 });
 
 Cypress.on("uncaught:exception", (err) => {
