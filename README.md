@@ -69,5 +69,6 @@ docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=strong_password -p 3307:3
 npx prisma migrate dev
 npx prisma db seed
 npx cypress run --spec cypress/e2e/run/*
+npx jest app/api/test/*
 
 

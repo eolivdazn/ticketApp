@@ -53,7 +53,6 @@ describe("POST REQUESTS with auth", () => {
         .send(el.data);
       expect(response.status).toBe(400);
       expect(response.text).toContain(el.message);
-      console.log(response);
     })
   );
 });
