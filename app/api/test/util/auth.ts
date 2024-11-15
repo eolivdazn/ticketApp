@@ -1,30 +1,29 @@
 import superfest from "supertest";
 
 export default async function auth() {
+  const request = superfest(process.env.API_URL!);
+  const csrfToken = process.env.CSRFTOKEN!;
+  const token = process.env.TOKEN!;
+  const callbackUrl = process.env.API_URL!;
+  const username = process.env.USERNAME!;
+  const password = process.env.PASSWROD!;
+  const cookie = process.env.COOKIE!;
 
-    const request = superfest("http://localhost:3000/api");
-const csrfToken =
-  "38e95149452364e3ea8e3663ab2881725a5d9f52c0b161760f6958ea07c16337";
-const callbackUrl = "http://localhost:3000/";
-const username = "eterra1";
-const password = "123";
+  const response = await request
+    .post("/auth/callback/password")
+    .set("Content-Type", "application/x-www-form-urlencoded")
+    .set(
+        "Cookie",
+        `${cookie}${encodeURIComponent(
+          callbackUrl
+        )}`
+      )
+    .send(`csrfToken=${csrfToken}&username=${username}&password=${password}`);
 
-const response = await request
-  .post("/auth/callback/password")
-  .set("Content-Type", "application/x-www-form-urlencoded")
-  .set(
-    "Cookie",
-    `next-auth.csrf-token=${csrfToken}|9ae09dbacb0d0b9807cdb1dac918626285dcb27f348b48b27148913b1af405f1; next-auth.callback-url=${encodeURIComponent(
-      callbackUrl
-    )}`
-  )
-  .send(`csrfToken=${csrfToken}&username=${username}&password=${password}`);
+  const regex = /next-auth\.session-token=([^;]+)/;
+  console.log(response.headers["set-cookie"]);
 
-expect(response.status).toBe(302);
-return response.headers["set-cookie"][0];
-
+  expect(response.status).toBe(302);
+  expect(response.headers["set-cookie"][0]).toMatch(regex);
+  return response.headers["set-cookie"][0];
 }
- 
-
-
-
