@@ -3,6 +3,12 @@ import  bcrypt  from "bcryptjs";
 
 const prisma = new PrismaClient()
 
+
+async function beforeAll() {
+  await prisma.ticket.deleteMany({}) 
+  await prisma.user.deleteMany({})
+}
+
 async function main() {
   // Seed users
   const user1 = await prisma.user.upsert({
@@ -95,7 +101,7 @@ async function main() {
     ],
   })
 }
-
+beforeAll()
 main()
   .then(async () => {
     await prisma.$disconnect()
