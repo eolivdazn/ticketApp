@@ -24,7 +24,7 @@ describe("Tickets request with auth", () => {
   });
   it(`PATCH /tickets`, async () => {
     const response = await request
-      .patch("/tickets/45")
+      .patch("/tickets/1")
       .set("Cookie", token)
       .set("Accept", "application/json, text/plain, */*")
       .set("Content-Type", "application/json")

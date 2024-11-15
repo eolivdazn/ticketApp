@@ -100,6 +100,7 @@ async function main() {
         createdAt: new Date(),
         updatedAt: new Date(),
         assignedToUserId: techUser.id,
+        id: 1
       },
     ],
   });
