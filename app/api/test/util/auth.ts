@@ -21,7 +21,6 @@ export default async function auth() {
     .send(`csrfToken=${csrfToken}&username=${username}&password=${password}`);
 
   const regex = /next-auth\.session-token=([^;]+)/;
-  console.log(response.headers["set-cookie"]);
 
   expect(response.status).toBe(302);
   expect(response.headers["set-cookie"][0]).toMatch(regex);
