@@ -1,9 +1,9 @@
 import superfest from "supertest";
 import auth from "./util/auth";
 
-const request = superfest("http://localhost:3000/api");
+const request = superfest(process.env.API_URL!);
 let token: string
-describe("POST REQUESTS Wihtout autht", () => {
+describe("POST request wihtout auth", () => {
   it("POST /tickets", async () => {
     const response = await request.post("/tickets");
     expect(response.status).toBe(401);
@@ -14,7 +14,7 @@ describe("POST REQUESTS Wihtout autht", () => {
   });
 });
 
-describe("POST REQUESTS with auth", () => {
+describe("POST request with auth", () => {
   beforeAll(async () => {
     token = await auth()
   });
@@ -51,7 +51,7 @@ describe("POST REQUESTS with auth", () => {
         .set("Accept", "application/json, text/plain, */*")
         .set("Content-Type", "application/json")
         .send(el.data);
-      expect(response.status).toBe(400);
+      expect(response.status).toBe( 400 );
       expect(response.text).toContain(el.message);
     })
   );

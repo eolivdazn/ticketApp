@@ -1,13 +1,13 @@
 import superfest from "supertest";
 import auth from "./util/auth";
 
-const request = superfest("http://localhost:3000/api");
+const request = superfest(process.env.API_URL!);
 let token: string;
-describe("POST REQUESTS with auth", () => {
+describe("Tickets request with auth", () => {
   beforeAll(async () => {
     token = await auth();
   });
-
+  
   it(`POST /tickets`, async () => {
     const response = await request
       .post("/tickets")
@@ -15,7 +15,7 @@ describe("POST REQUESTS with auth", () => {
       .set("Accept", "application/json, text/plain, */*")
       .set("Content-Type", "application/json")
       .send({
-        title: "test",
+        title: "Post test",
         description: "test",
         status: "STARTED",
         priority: "HIGH",
@@ -24,16 +24,16 @@ describe("POST REQUESTS with auth", () => {
   });
   it(`PATCH /tickets`, async () => {
     const response = await request
-      .post("/tickets")
+      .patch("/tickets/1")
       .set("Cookie", token)
       .set("Accept", "application/json, text/plain, */*")
       .set("Content-Type", "application/json")
       .send({
-        title: "test",
+        title: "Patch test",
         description: "test",
         status: "STARTED",
         priority: "HIGH",
       });
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
   });
 });
