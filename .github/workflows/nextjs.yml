@@ -85,7 +85,7 @@ jobs:
       - name: Run prisma seed
         run: npx prisma db seed
       - name: ts-node prisma/seed.ts
-        run: npm run dev
+        run: npm run dev &
       - name: Run API test
         run: npx jest app/api/test/*
       # - name: Upload artifact
