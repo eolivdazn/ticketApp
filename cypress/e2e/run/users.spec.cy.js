@@ -1,4 +1,4 @@
-describe("Open user ticket app", () => {
+describe("Visit ticket", () => {
   beforeEach(() => {
     cy.loginViaUi();
   });

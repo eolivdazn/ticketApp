@@ -1,4 +1,4 @@
-describe('Open the ticket app', () => {
+describe('Visit the dashboard', () => {
   beforeEach(() => {
     cy.visit('/')
   })
