@@ -1,19 +1,17 @@
 name: (Staging) CI/CD Pipeline
 
 env:
-  VERCEL_ORG_ID: 6IH3BXCbcTKqIwCCklt2EC2m
-  VERCEL_PROJECT_ID: prj_h1gzuexLk4d5872qrZCCJ1GR0pyZ
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
     branches:
-      - ci-deploy
+      - "*"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # env:
-      # DATABASE_URL: "postgres://default:m7KLPdXl0yGM@ep-winter-surf-a4z8u18n.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -22,13 +20,13 @@ jobs:
         run: npm install --global vercel
 
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --git-branch=ci-deploy --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        run: vercel build --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Get Vercel .env
-        run: vercel env pull .env --environment=preview --git-branch=ci-deploy --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+        run: vercel env pull .env --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -38,13 +36,6 @@ jobs:
           spec: cypress/e2e/run/*
           wait-on: "http://localhost:3000"
           config: baseUrl=http://localhost:3000/
-        # with:
-        #   build: npm run build
-        #   start: npm run start
-        #   wait-on: "http://localhost:3000"
-        #   record: true
-        # env:
-        #   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
       - name: Deploy To Vercel [Staging]
-        run: vercel deploy --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
