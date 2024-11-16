@@ -1,0 +1,46 @@
+name: (Staging) CI/CD Pipeline
+
+env:
+  VERCEL_ORG_ID: 6IH3BXCbcTKqIwCCklt2EC2m
+  VERCEL_PROJECT_ID: prj_h1gzuexLk4d5872qrZCCJ1GR0pyZ
+
+on:
+  push:
+    branches:
+      - ci-deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --git-branch=ci-deploy --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+
+      - name: Build Project Artifacts
+        run: vercel build --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+
+      - name: Get Vercel .env
+        run: vercel env pull .env --environment=preview --git-branch=staging --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/run/*
+          wait-on: "http://localhost:3000"
+          config: baseUrl=http://localhost:3000/
+        # with:
+        #   build: npm run build
+        #   start: npm run start
+        #   wait-on: "http://localhost:3000"
+        #   record: true
+        # env:
+        #   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: Deploy To Vercel [Staging]
+        run: vercel deploy --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
