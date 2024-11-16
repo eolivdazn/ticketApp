@@ -12,8 +12,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: "postgres://default:m7KLPdXl0yGM@ep-winter-surf-a4z8u18n.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+    # env:
+      # DATABASE_URL: "postgres://default:m7KLPdXl0yGM@ep-winter-surf-a4z8u18n.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
         run: vercel build --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
 
       - name: Get Vercel .env
-        run: vercel env pull .env --environment=preview --git-branch=staging --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
+        run: vercel env pull .env --environment=preview --git-branch=ci-deploy --token=KrzdPTcOQDSKnG4Ov6m6Qwu2
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
