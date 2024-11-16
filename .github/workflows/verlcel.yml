@@ -12,6 +12,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: "postgres://default:m7KLPdXl0yGM@ep-winter-surf-a4z8u18n.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
